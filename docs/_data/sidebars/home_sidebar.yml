@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: aoc2020 core
       url: core.html
     output: web
     title: aoc2020
