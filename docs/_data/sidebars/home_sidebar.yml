@@ -10,8 +10,8 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: aoc2020 core
-      url: core.html
+      title: day 1
+      url: 01.html
     output: web
     title: aoc2020
   output: web
