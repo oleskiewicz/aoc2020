@@ -36,8 +36,8 @@ nb_path: "05.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_rows</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">n_cols</span> <span class="o">=</span> <span class="mi">8</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">groupby</span>
 </pre></div>
 
     </div>
@@ -54,7 +54,32 @@ nb_path: "05.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_rows</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">n_cols</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="part-1">part 1<a class="anchor-link" href="#part-1"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@lru_cache</span>
+<span class="k">def</span> <span class="nf">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
     <span class="n">row_upper</span> <span class="o">=</span> <span class="n">n_rows</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">row_lower</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -63,7 +88,6 @@ nb_path: "05.ipynb"
             <span class="n">row_upper</span> <span class="o">=</span> <span class="p">(</span><span class="n">row_upper</span> <span class="o">+</span> <span class="n">row_lower</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
         <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span>
             <span class="n">row_lower</span> <span class="o">=</span> <span class="p">((</span><span class="n">row_upper</span> <span class="o">+</span> <span class="n">row_lower</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="c1">#     print(c, row_lower, row_upper)</span>
     <span class="k">assert</span> <span class="n">row_lower</span> <span class="o">==</span> <span class="n">row_upper</span>
     <span class="k">return</span> <span class="n">row_lower</span>
 </pre></div>
@@ -99,7 +123,8 @@ nb_path: "05.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_col</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@lru_cache</span>
+<span class="k">def</span> <span class="nf">get_col</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
     <span class="n">col_upper</span> <span class="o">=</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">col_lower</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -108,7 +133,6 @@ nb_path: "05.ipynb"
             <span class="n">col_upper</span> <span class="o">=</span> <span class="p">(</span><span class="n">col_upper</span> <span class="o">+</span> <span class="n">col_lower</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
         <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span>
             <span class="n">col_lower</span> <span class="o">=</span> <span class="p">((</span><span class="n">col_upper</span> <span class="o">+</span> <span class="n">col_lower</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="c1">#         print(c, col_lower, col_upper)</span>
     <span class="k">assert</span> <span class="n">col_lower</span> <span class="o">==</span> <span class="n">col_upper</span>
     <span class="k">return</span> <span class="n">col_lower</span>
 </pre></div>
@@ -144,7 +168,8 @@ nb_path: "05.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_code</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@lru_cache</span>
+<span class="k">def</span> <span class="nf">get_code</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">+</span> <span class="n">get_col</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
 </pre></div>
 
@@ -202,6 +227,23 @@ nb_path: "05.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">codes</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s2">&quot;./data/05.txt&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">codes</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_code</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">)</span>
 </pre></div>
@@ -220,7 +262,7 @@ nb_path: "05.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p1</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;./data/05.txt&quot;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p1</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -246,6 +288,315 @@ nb_path: "05.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="part-2">part 2<a class="anchor-link" href="#part-2"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'll start by getting the bounds on rows:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">row_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">])</span>
+<span class="n">row_min</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>11</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">row_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">])</span>
+<span class="n">row_max</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>116</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And cols in those rows might be incomplete, since number of lines in input file is less than <code>(116 - 11 + 1) * 8 = 848</code>.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[(</span><span class="n">get_col</span><span class="p">(</span><span class="n">code</span><span class="p">),</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">))</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span> <span class="k">if</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">==</span> <span class="n">row_min</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(3, 11), (4, 11), (5, 11), (7, 11), (6, 11)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[(</span><span class="n">get_col</span><span class="p">(</span><span class="n">code</span><span class="p">),</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">))</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span> <span class="k">if</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">==</span> <span class="n">row_max</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(0, 116)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So, we're looking for a row with less than 8 columns, and between 11 and 116:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">col_row</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span>
+    <span class="p">(</span><span class="n">get_col</span><span class="p">(</span><span class="n">code</span><span class="p">),</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span>
+    <span class="k">if</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">11</span> <span class="ow">and</span> <span class="n">get_row</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">116</span>
+<span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">(</span><span class="n">col_row</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cols</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="n">row</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>76</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="ow">in</span> <span class="n">col_row</span> <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">76</span><span class="p">]:</span>
+        <span class="k">break</span>
+<span class="n">col</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Therefore, our seat is in row 76 and column 2, making the ID:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">col</span>
+<span class="n">p2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>610</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Appendix">Appendix<a class="anchor-link" href="#Appendix"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The seat numbers, FBLR, can actually be expressed as 0s and 1s; since row number is multipled by 8 for an ID, and column number is $2^3$, the FBLR encoding is actually identical to binary integer encoding.</p>
+<p>This would speed up both part 1 and part 2.  For a solution that makes use of this, see <a href="https://github.com/sophiebits/adventofcode/blob/main/2020/day05.py">https://github.com/sophiebits/adventofcode/blob/main/2020/day05.py</a>.  Incredible.</p>
+
+</div>
+</div>
+</div>
 </div>
  
 
