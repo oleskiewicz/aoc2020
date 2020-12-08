@@ -30,6 +30,9 @@ entries:
     - output: web,pdf
       title: day 7
       url: 07.html
+    - output: web,pdf
+      title: day 8
+      url: 08.html
     output: web
     title: aoc2020
   output: web
