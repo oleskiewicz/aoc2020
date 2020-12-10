@@ -2,9 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"window": "09.ipynb"}
 
-modules = []
+modules = ["util.py"]
 
 doc_url = "https://oleskiewicz.github.io/aoc2020/"
 
