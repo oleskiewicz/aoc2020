@@ -2,7 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"window": "09.ipynb"}
+index = {"window": "09.ipynb",
+         "pairwise": "10.ipynb",
+         "split": "10.ipynb"}
 
 modules = ["util.py"]
 
