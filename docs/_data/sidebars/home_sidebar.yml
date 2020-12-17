@@ -54,6 +54,9 @@ entries:
     - output: web,pdf
       title: day 15
       url: 15.html
+    - output: web,pdf
+      title: day 17
+      url: 17.html
     output: web
     title: aoc2020
   output: web
