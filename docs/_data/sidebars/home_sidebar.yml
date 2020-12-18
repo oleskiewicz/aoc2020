@@ -55,8 +55,14 @@ entries:
       title: day 15
       url: 15.html
     - output: web,pdf
+      title: day 16
+      url: 16.html
+    - output: web,pdf
       title: day 17
       url: 17.html
+    - output: web,pdf
+      title: day 18
+      url: 18.html
     output: web
     title: aoc2020
   output: web
